@@ -1,12 +1,12 @@
 // ── Zone definitions ──
 const ZONES = [
-  { name: 'REST',     min: 30,  max: 59,  color: '#4fc3f7', bg: '#060d14', desc: 'Deep rest state. Common during sleep or meditative calm. Heart is functioning at minimal exertion.' },
-  { name: 'NORMAL',   min: 60,  max: 99,  color: '#00e5ff', bg: '#0a0e1a', desc: 'Normal resting heart rate. Cardiovascular system is operating efficiently at this range.' },
-  { name: 'WARM-UP',  min: 100, max: 114, color: '#69f0ae', bg: '#071208', desc: 'Light activity zone. Increased circulation begins; suitable for warm-up routines and light movement.' },
-  { name: 'FAT BURN', min: 115, max: 134, color: '#ffeb3b', bg: '#141000', desc: 'Optimal fat oxidation zone. Body draws primarily on fat stores for fuel at this intensity.' },
-  { name: 'CARDIO',   min: 135, max: 159, color: '#ffa726', bg: '#140900', desc: 'Aerobic conditioning zone. Significant cardiovascular and endurance improvements occur here.' },
-  { name: 'PEAK',     min: 160, max: 179, color: '#ef5350', bg: '#140404', desc: 'High-intensity exertion. Maximum VO₂ engagement; sustainable only for short intervals.' },
-  { name: 'DANGER',   min: 180, max: 220, color: '#e040fb', bg: '#100010', desc: 'Extreme zone. Exceeds safe aerobic capacity for most individuals. Exercise extreme caution.' },
+  { name: 'REST',     min: 30,  max: 59,  color: '#ef9a9a', bg: '#0f0303', desc: 'Deep rest state. Common during sleep or meditative calm. Heart is functioning at minimal exertion.' },
+  { name: 'NORMAL',   min: 60,  max: 99,  color: '#e53935', bg: '#0f0505', desc: 'Normal resting heart rate. Cardiovascular system is operating efficiently at this range.' },
+  { name: 'WARM-UP',  min: 100, max: 114, color: '#ff7043', bg: '#150600', desc: 'Light activity zone. Increased circulation begins; suitable for warm-up routines and light movement.' },
+  { name: 'FAT BURN', min: 115, max: 134, color: '#ff8f00', bg: '#160900', desc: 'Optimal fat oxidation zone. Body draws primarily on fat stores for fuel at this intensity.' },
+  { name: 'CARDIO',   min: 135, max: 159, color: '#f4511e', bg: '#160400', desc: 'Aerobic conditioning zone. Significant cardiovascular and endurance improvements occur here.' },
+  { name: 'PEAK',     min: 160, max: 179, color: '#b71c1c', bg: '#120000', desc: 'High-intensity exertion. Maximum VO₂ engagement; sustainable only for short intervals.' },
+  { name: 'DANGER',   min: 180, max: 220, color: '#880e4f', bg: '#100008', desc: 'Extreme zone. Exceeds safe aerobic capacity for most individuals. Exercise extreme caution.' },
 ];
 
 const MUSICAL_TEMPOS = [

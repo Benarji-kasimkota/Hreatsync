@@ -1,7 +1,7 @@
 :root {
-  --zone-color: #00e5ff;
-  --zone-bg: #0a0e1a;
-  --zone-glow: rgba(0, 229, 255, 0.3);
+  --zone-color: #e53935;
+  --zone-bg: #0f0505;
+  --zone-glow: rgba(229, 57, 53, 0.35);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

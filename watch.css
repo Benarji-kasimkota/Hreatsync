@@ -1,7 +1,7 @@
 :root {
-  --zc: #00e5ff;
-  --zg: rgba(0,229,255,0.3);
-  --page-bg: #06080f;
+  --zc: #e53935;
+  --zg: rgba(229,57,53,0.35);
+  --page-bg: #0f0404;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }

@@ -342,3 +342,21 @@ window.addEventListener('resize', () => { resizeECG(); drawRing(); });
 resizeECG();
 applyBPM(72);
 requestAnimationFrame(drawECG);
+
+// ── ML stress display ──
+(function initML() {
+  if (typeof ML === 'undefined') return;
+  ML.init();
+  setInterval(async () => {
+    if (!ML.isReady) return;
+    const sdnn  = calcSDNN();
+    const rmssd = calcRMSSD();
+    const result = await ML.predict(bpm, sdnn, rmssd);
+    if (!result) return;
+    const stressEl = el('m-stress');
+    if (stressEl) {
+      stressEl.textContent  = result.stress;
+      stressEl.style.color  = result.state.color;
+    }
+  }, 2000);
+})();

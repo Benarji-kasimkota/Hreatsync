@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#080202" />
+  <title>HeartSync — ML Insights</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="ml.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Top bar -->
+  <div class="ml-topbar">
+    <div class="topbar-left">
+      <div class="topbar-title">ML INSIGHTS</div>
+      <div class="topbar-sub">TensorFlow.js Neural Network</div>
+    </div>
+    <div class="model-status" id="model-status">
+      <div class="ms-dot" id="ms-dot"></div>
+      <span id="ms-label">Loading…</span>
+    </div>
+  </div>
+
+  <!-- Sync pill -->
+  <div class="sync-row">
+    <div class="sync-pill" id="sync-pill">
+      <div class="sync-dot" id="sync-dot"></div>
+      <span id="sync-label">STANDALONE</span>
+    </div>
+    <div class="sample-count" id="sample-count">0 samples</div>
+  </div>
+
+  <!-- Scrollable body -->
+  <div class="ml-scroll">
+
+    <!-- Stress gauge -->
+    <div class="gauge-section">
+      <div class="gauge-wrap">
+        <svg class="gauge-svg" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- Track arc (150° span, starting bottom-left) -->
+          <path id="gauge-track" d="M 25 115 A 85 85 0 1 1 195 115" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12" stroke-linecap="round"/>
+          <!-- Fill arc -->
+          <path id="gauge-fill"  d="M 25 115 A 85 85 0 1 1 195 115" fill="none" stroke="#e53935" stroke-width="12" stroke-linecap="round"
+            stroke-dasharray="267" stroke-dashoffset="267" style="transition: stroke-dashoffset 0.6s ease, stroke 0.6s ease;"/>
+          <!-- Needle dot -->
+          <circle id="gauge-dot" cx="25" cy="115" r="6" fill="#e53935" style="transition: cx 0.6s ease, cy 0.6s ease, fill 0.6s ease;"/>
+          <!-- Zone tick marks -->
+          <line x1="25"  y1="115" x2="36"  y2="104" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+          <line x1="53"  y1="53"  x2="61"  y2="63"  stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+          <line x1="110" y1="30"  x2="110" y2="42"  stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+          <line x1="167" y1="53"  x2="159" y2="63"  stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+          <line x1="195" y1="115" x2="184" y2="104" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+          <!-- Labels -->
+          <text x="14"  y="130" font-size="9" fill="#334" font-family="Share Tech Mono,monospace">0</text>
+          <text x="197" y="130" font-size="9" fill="#334" font-family="Share Tech Mono,monospace">100</text>
+        </svg>
+
+        <!-- Center content -->
+        <div class="gauge-center">
+          <div class="stress-val" id="stress-val">—</div>
+          <div class="stress-unit">STRESS</div>
+          <div class="confidence-bar-wrap">
+            <div class="confidence-bar" id="confidence-bar" style="width:0%"></div>
+          </div>
+          <div class="confidence-label" id="confidence-label">Confidence: —</div>
+        </div>
+      </div>
+
+      <!-- State badge -->
+      <div class="state-badge" id="state-badge">
+        <div class="state-dot" id="state-dot"></div>
+        <span id="state-label">INITIALIZING</span>
+      </div>
+    </div>
+
+    <!-- Live BPM row -->
+    <div class="live-row">
+      <div class="lr-metric">
+        <div class="lr-val" id="ml-bpm">—</div>
+        <div class="lr-label">BPM</div>
+      </div>
+      <div class="lr-divider"></div>
+      <div class="lr-metric">
+        <div class="lr-val" id="ml-sdnn">—</div>
+        <div class="lr-label">SDNN ms</div>
+      </div>
+      <div class="lr-divider"></div>
+      <div class="lr-metric">
+        <div class="lr-val" id="ml-rmssd">—</div>
+        <div class="lr-label">RMSSD ms</div>
+      </div>
+      <div class="lr-divider"></div>
+      <div class="lr-metric">
+        <div class="lr-val" id="ml-pnn50">—</div>
+        <div class="lr-label">pNN50 %</div>
+      </div>
+    </div>
+
+    <!-- Anomaly alert -->
+    <div class="anomaly-card" id="anomaly-card" style="display:none">
+      <div class="anomaly-icon">⚠</div>
+      <div class="anomaly-body">
+        <div class="anomaly-title" id="anomaly-title">Anomaly Detected</div>
+        <div class="anomaly-msg"   id="anomaly-msg">—</div>
+        <div class="anomaly-z"     id="anomaly-z">z-score: —</div>
+      </div>
+    </div>
+
+    <!-- Trend prediction -->
+    <div class="section-label">BPM TREND PREDICTION</div>
+    <div class="trend-card">
+      <div class="trend-row">
+        <div class="trend-metric">
+          <div class="trend-val" id="trend-predicted">—</div>
+          <div class="trend-label">PREDICTED BPM</div>
+          <div class="trend-sub">in ~30 s</div>
+        </div>
+        <div class="trend-arrow" id="trend-arrow">→</div>
+        <div class="trend-metric">
+          <div class="trend-val" id="trend-direction" style="font-size:0.8rem">—</div>
+          <div class="trend-label">DIRECTION</div>
+          <div class="trend-sub" id="trend-r2">R² —</div>
+        </div>
+      </div>
+      <canvas class="trend-canvas" id="trend-canvas"></canvas>
+    </div>
+
+    <!-- Stress history sparkline -->
+    <div class="section-label">STRESS HISTORY</div>
+    <div class="stress-hist-wrap">
+      <canvas class="stress-canvas" id="stress-canvas"></canvas>
+    </div>
+
+    <!-- Model info -->
+    <div class="section-label">MODEL DETAILS</div>
+    <div class="model-card">
+      <div class="mc-row">
+        <span class="mc-label">Architecture</span>
+        <span class="mc-val">4 → 16 → 8 → 1</span>
+      </div>
+      <div class="mc-divider"></div>
+      <div class="mc-row">
+        <span class="mc-label">Framework</span>
+        <span class="mc-val">TensorFlow.js 4.20</span>
+      </div>
+      <div class="mc-divider"></div>
+      <div class="mc-row">
+        <span class="mc-label">Pre-training</span>
+        <span class="mc-val">500 synthetic HRV samples</span>
+      </div>
+      <div class="mc-divider"></div>
+      <div class="mc-row">
+        <span class="mc-label">Online samples</span>
+        <span class="mc-val" id="mc-samples">0</span>
+      </div>
+      <div class="mc-divider"></div>
+      <div class="mc-row">
+        <span class="mc-label">Predictions made</span>
+        <span class="mc-val" id="mc-preds">0</span>
+      </div>
+      <div class="mc-divider"></div>
+      <div class="mc-row">
+        <span class="mc-label">Inputs</span>
+        <span class="mc-val">BPM · SDNN · RMSSD · pNN50</span>
+      </div>
+    </div>
+
+    <div class="scroll-spacer"></div>
+  </div><!-- /ml-scroll -->
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="index.html"   class="nav-item"><span class="nav-icon">♥</span><span class="nav-label">MON</span></a>
+    <a href="watch.html"   class="nav-item"><span class="nav-icon">⌚</span><span class="nav-label">WATCH</span></a>
+    <a href="mobile.html"  class="nav-item"><span class="nav-icon">📱</span><span class="nav-label">MOBILE</span></a>
+    <a href="ml.html"      class="nav-item nav-active"><span class="nav-icon">🧠</span><span class="nav-label">ML</span></a>
+    <a href="account.html" class="nav-item"><span class="nav-icon">👤</span><span class="nav-label">ACCT</span></a>
+  </nav>
+
+</div><!-- /app -->
+
+<script src="auth.js"></script>
+<script src="ml-engine.js"></script>
+<script src="ml.js"></script>
+</body>
+</html>

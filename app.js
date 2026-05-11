@@ -462,6 +462,74 @@ function drawECG(timestamp) {
   requestAnimationFrame(drawECG);
 }
 
+// ── Dataset Player ──
+let dsIndex    = 0;
+let dsPlaying  = false;
+let dsTimer    = null;
+let dsSpeed    = 1;
+
+function dsStep() {
+  if (!dsPlaying || dsIndex >= BIDMC_DATASET.length) {
+    if (dsIndex >= BIDMC_DATASET.length) dsStop();
+    return;
+  }
+
+  const [t, hr, spo2, resp] = BIDMC_DATASET[dsIndex];
+  applyBPM(hr, false);   // drive all HeartSync modules with real data
+
+  // Update dataset panel readouts
+  const mm  = String(Math.floor(t / 60)).padStart(1,'0');
+  const ss  = String(t % 60).padStart(2,'0');
+  document.getElementById('ds-time').textContent  = `${mm}:${ss}`;
+  document.getElementById('ds-hr').textContent    = hr;
+  document.getElementById('ds-spo2').textContent  = spo2;
+  document.getElementById('ds-resp').textContent  = resp;
+  document.getElementById('ds-idx').textContent   = `${dsIndex + 1} / ${BIDMC_DATASET.length}`;
+
+  const pct = (dsIndex / (BIDMC_DATASET.length - 1)) * 100;
+  document.getElementById('ds-progress-bar').style.width = pct + '%';
+
+  dsIndex++;
+  dsTimer = setTimeout(dsStep, 1000 / dsSpeed);
+}
+
+function dsPlay() {
+  dsPlaying = true;
+  document.getElementById('ds-play').disabled  = true;
+  document.getElementById('ds-pause').disabled = false;
+  dsStep();
+}
+
+function dsPause() {
+  dsPlaying = false;
+  clearTimeout(dsTimer);
+  document.getElementById('ds-play').disabled  = false;
+  document.getElementById('ds-pause').disabled = true;
+}
+
+function dsStop() {
+  dsPlaying = false;
+  clearTimeout(dsTimer);
+  dsIndex = 0;
+  document.getElementById('ds-play').disabled  = false;
+  document.getElementById('ds-pause').disabled = true;
+  document.getElementById('ds-progress-bar').style.width = '0%';
+  document.getElementById('ds-time').textContent = '0:00';
+  document.getElementById('ds-idx').textContent  = `0 / ${BIDMC_DATASET.length}`;
+}
+
+document.getElementById('ds-play')?.addEventListener('click',  dsPlay);
+document.getElementById('ds-pause')?.addEventListener('click', dsPause);
+document.getElementById('ds-reset')?.addEventListener('click', dsStop);
+
+document.querySelectorAll('.ds-speed-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    dsSpeed = parseFloat(btn.dataset.speed);
+    document.querySelectorAll('.ds-speed-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
 // ── Init ──
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();

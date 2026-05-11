@@ -252,5 +252,109 @@ input[type=range]::-webkit-slider-thumb {
 .beat-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); transition: background 0.08s, box-shadow 0.08s; }
 .beat-dot.lit { background: var(--zone-color); box-shadow: 0 0 10px var(--zone-glow); }
 
+/* ── Dataset Player ── */
+.dataset-source {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  color: #556;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.ds-badge {
+  background: rgba(105,240,174,0.12);
+  border: 1px solid rgba(105,240,174,0.3);
+  color: #69f0ae;
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+}
+.ds-link { color: var(--zone-color); text-decoration: none; margin-left: auto; font-size: 0.68rem; }
+.ds-link:hover { text-decoration: underline; }
+
+.dataset-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+.ds-btn {
+  padding: 0.5rem 1.1rem;
+  background: transparent;
+  border: 1px solid var(--zone-color);
+  border-radius: 7px;
+  color: var(--zone-color);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.6s;
+}
+.ds-btn:hover:not(:disabled) { background: rgba(255,255,255,0.05); }
+.ds-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.ds-speed-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: auto;
+}
+.ds-speed-label { font-size: 0.6rem; color: #445; letter-spacing: 0.12em; }
+.ds-speed-btn {
+  padding: 0.35rem 0.65rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 5px;
+  color: #556;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ds-speed-btn.active, .ds-speed-btn:hover {
+  border-color: var(--zone-color);
+  color: var(--zone-color);
+}
+
+.ds-progress-wrap {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.ds-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--zone-color);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--zone-glow);
+  transition: width 0.9s linear, background 0.6s;
+}
+.ds-live-row {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.ds-live-metric {
+  flex: 1;
+  min-width: 70px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 0.7rem;
+  text-align: center;
+  border-top: 2px solid var(--zone-color);
+  transition: border-color 0.6s;
+}
+.ds-live-val {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: var(--zone-color);
+  transition: color 0.4s;
+}
+.ds-live-label { font-size: 0.55rem; color: #445; letter-spacing: 0.15em; margin-top: 2px; }
+
 /* ── Footer ── */
 footer { text-align: center; padding: 2rem; font-size: 0.68rem; color: #334; letter-spacing: 0.15em; }

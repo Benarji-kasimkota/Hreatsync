@@ -131,6 +131,53 @@
     <div class="session-stats" id="session-stats">Collecting session data — updates every 5 seconds…</div>
   </div>
 
+  <!-- DATASET PLAYER -->
+  <div class="card card-wide" id="dataset-card">
+    <div class="card-title">Dataset Player — Real Clinical Data</div>
+    <div class="dataset-source">
+      <span class="ds-badge">PhysioNet</span>
+      BIDMC PPG &amp; Respiration Dataset · Patient 01 · 8 min ICU recording · 1 Hz
+      <a class="ds-link" href="https://physionet.org/content/bidmc/1.0.0/" target="_blank">↗ Source</a>
+    </div>
+    <div class="dataset-controls">
+      <button class="ds-btn" id="ds-play">▶ PLAY</button>
+      <button class="ds-btn" id="ds-pause" disabled>⏸ PAUSE</button>
+      <button class="ds-btn" id="ds-reset">↺ RESET</button>
+      <div class="ds-speed-wrap">
+        <span class="ds-speed-label">SPEED</span>
+        <button class="ds-speed-btn active" data-speed="1">1×</button>
+        <button class="ds-speed-btn" data-speed="2">2×</button>
+        <button class="ds-speed-btn" data-speed="5">5×</button>
+        <button class="ds-speed-btn" data-speed="10">10×</button>
+      </div>
+    </div>
+    <div class="ds-progress-wrap">
+      <div class="ds-progress-bar" id="ds-progress-bar"></div>
+    </div>
+    <div class="ds-live-row">
+      <div class="ds-live-metric">
+        <div class="ds-live-val" id="ds-time">0:00</div>
+        <div class="ds-live-label">TIME</div>
+      </div>
+      <div class="ds-live-metric">
+        <div class="ds-live-val" id="ds-hr">—</div>
+        <div class="ds-live-label">HR BPM</div>
+      </div>
+      <div class="ds-live-metric">
+        <div class="ds-live-val" id="ds-spo2">—</div>
+        <div class="ds-live-label">SpO₂ %</div>
+      </div>
+      <div class="ds-live-metric">
+        <div class="ds-live-val" id="ds-resp">—</div>
+        <div class="ds-live-label">RESP /min</div>
+      </div>
+      <div class="ds-live-metric">
+        <div class="ds-live-val" id="ds-idx">0 / 480</div>
+        <div class="ds-live-label">SAMPLE</div>
+      </div>
+    </div>
+  </div>
+
   <!-- VIBRATION ENGINE -->
   <div class="card">
     <div class="card-title">Vibration Engine — Cardiac Mirror</div>
@@ -159,6 +206,7 @@
   <a href="mobile.html" style="color:inherit;text-decoration:underline">Mobile</a>
 </footer>
 
+<script src="dataset.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

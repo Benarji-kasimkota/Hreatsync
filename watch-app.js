@@ -355,3 +355,11 @@ goToScreen(0);
 applyBPM(72);
 updateSyncIndicator(true);
 requestAnimationFrame(drawECG);
+
+// ── Auth user display ──
+(function showAuthUser() {
+  if (typeof AUTH === 'undefined') return;
+  const user = AUTH.getUser();
+  const el   = document.getElementById('ssb-user');
+  if (el && user) el.textContent = user.name || user.email || '';
+})();

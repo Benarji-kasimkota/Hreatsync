@@ -150,12 +150,16 @@ function generateRR() {
   const sdnnSim = Math.max(8, 78 - bpm * 0.36);
   return Math.max(250, Math.round(base + gaussNoise() * sdnnSim));
 }
+let _beatCount = 0;
 function pushRR(rr) {
   rrIntervals.push(rr);
   if (rrIntervals.length > 30) rrIntervals.shift();
   ecgBeatIntervalTarget = rr;
   updateHRVDisplay();
   drawSparkline();
+  if (typeof AUTH !== 'undefined' && ++_beatCount % 6 === 0) {
+    AUTH.recordSession(bpm, calcSDNN(), calcRMSSD());
+  }
 }
 function calcSDNN() {
   if (rrIntervals.length < 2) return 0;

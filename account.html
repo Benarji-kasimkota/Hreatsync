@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#080202" />
+  <title>HeartSync — Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="account.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Top bar -->
+  <div class="acc-topbar">
+    <div class="topbar-title">ACCOUNT</div>
+    <button class="signout-btn" id="signout-btn">Sign Out</button>
+  </div>
+
+  <!-- Scrollable body -->
+  <div class="acc-scroll">
+
+    <!-- Profile header -->
+    <div class="profile-header">
+      <div class="avatar" id="acc-avatar">♥</div>
+      <div class="profile-info">
+        <div class="profile-name"  id="acc-name">Loading…</div>
+        <div class="profile-email" id="acc-email">—</div>
+        <div class="provider-badge" id="provider-badge">
+          <span id="provider-icon"></span>
+          <span id="provider-label">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cardiac history stats -->
+    <div class="section-label">CARDIAC HISTORY</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val" id="stat-sessions">—</div>
+        <div class="stat-label">SESSIONS</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-avg-bpm">—</div>
+        <div class="stat-label">AVG BPM</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-avg-hrv">—</div>
+        <div class="stat-label">AVG SDNN</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="stat-streak">—</div>
+        <div class="stat-label">DAY STREAK</div>
+      </div>
+    </div>
+
+    <!-- Connected devices -->
+    <div class="section-label">CONNECTED DEVICES</div>
+    <div class="devices-list">
+      <div class="device-row">
+        <div class="device-icon">⌚</div>
+        <div class="device-info">
+          <div class="device-name">Apple Watch</div>
+          <div class="device-sub" id="dev-watch-sub">Searching…</div>
+        </div>
+        <div class="status-dot" id="dev-watch-dot"></div>
+      </div>
+      <div class="device-row">
+        <div class="device-icon">📱</div>
+        <div class="device-info">
+          <div class="device-name">iPhone Companion</div>
+          <div class="device-sub" id="dev-mobile-sub">Searching…</div>
+        </div>
+        <div class="status-dot" id="dev-mobile-dot"></div>
+      </div>
+      <div class="device-row">
+        <div class="device-icon">💻</div>
+        <div class="device-info">
+          <div class="device-name">Web Dashboard</div>
+          <div class="device-sub">This device · Active</div>
+        </div>
+        <div class="status-dot active"></div>
+      </div>
+    </div>
+
+    <!-- Rhythm profile -->
+    <div class="section-label">YOUR RHYTHM PROFILE</div>
+    <div class="rhythm-card">
+      <div class="rp-row">
+        <span class="rp-label">Dominant Zone</span>
+        <span class="rp-val" id="rp-zone">—</span>
+      </div>
+      <div class="rp-divider"></div>
+      <div class="rp-row">
+        <span class="rp-label">Rhythm Type</span>
+        <span class="rp-val" id="rp-rhythm">—</span>
+      </div>
+      <div class="rp-divider"></div>
+      <div class="rp-row">
+        <span class="rp-label">Avg SDNN</span>
+        <span class="rp-val" id="rp-sdnn">—</span>
+      </div>
+      <div class="rp-divider"></div>
+      <div class="rp-row">
+        <span class="rp-label">Avg RMSSD</span>
+        <span class="rp-val" id="rp-rmssd">—</span>
+      </div>
+    </div>
+
+    <!-- Preferences -->
+    <div class="section-label">PREFERENCES</div>
+    <div class="settings-list">
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-name">Auto Haptic Mirror</div>
+          <div class="setting-desc">Start vibration feedback on page load</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="set-haptic" />
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-name">Cross-Tab Sync</div>
+          <div class="setting-desc">Receive live BPM from Watch &amp; Mobile tabs</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="set-sync" />
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-name">Privacy Mode</div>
+          <div class="setting-desc">Mask biometric values on screen</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="set-privacy" />
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Apple ecosystem note -->
+    <div class="eco-card">
+      <div class="eco-icon">🍎</div>
+      <div class="eco-body">
+        <div class="eco-title">Apple Ecosystem</div>
+        <div class="eco-desc">
+          Native Apple Watch heart rate access requires a HealthKit iOS app.
+          This web companion syncs in real time within the same Safari session
+          via BroadcastChannel. Sign in with Apple uses your Apple ID — no
+          password stored on our side.
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-spacer"></div>
+  </div><!-- /acc-scroll -->
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="index.html"   class="nav-item"><span class="nav-icon">♥</span><span class="nav-label">MONITOR</span></a>
+    <a href="watch.html"   class="nav-item"><span class="nav-icon">⌚</span><span class="nav-label">WATCH</span></a>
+    <a href="mobile.html"  class="nav-item"><span class="nav-icon">📱</span><span class="nav-label">MOBILE</span></a>
+    <a href="account.html" class="nav-item nav-active"><span class="nav-icon">👤</span><span class="nav-label">ACCOUNT</span></a>
+  </nav>
+
+</div><!-- /app -->
+
+<script src="auth.js"></script>
+<script src="account.js"></script>
+</body>
+</html>

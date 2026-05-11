@@ -332,6 +332,7 @@ function recordHistory() {
   sessionHistory.push({ t: Date.now(), bpm, sdnn: calcSDNN() });
   if (sessionHistory.length > SESSION_MAX) sessionHistory.shift();
   drawTimeline();
+  if (typeof AUTH !== 'undefined') AUTH.recordSession(bpm, calcSDNN(), calcRMSSD());
   historyTimer = setTimeout(recordHistory, 5000);
 }
 

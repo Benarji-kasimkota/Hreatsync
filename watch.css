@@ -602,6 +602,13 @@ body {
 .ssb-info { font-size: 0.62rem; color: #334; }
 .ssb-info a { color: var(--zc); text-decoration: none; }
 .ssb-info a:hover { text-decoration: underline; }
+.ssb-user {
+  margin-left: auto;
+  font-size: 0.58rem;
+  color: #445;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
 
 /* ── Responsive ── */
 @media (max-width: 660px) {

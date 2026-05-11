@@ -173,6 +173,7 @@
     <span id="w-sync-label">IDLE</span>
     <span class="ssb-sep">·</span>
     <span class="ssb-info">Open <a href="index.html">Extended Web</a> or <a href="mobile.html">Mobile</a> in another tab to receive live data</span>
+    <span class="ssb-user" id="ssb-user"></span>
   </div>
 
   <!-- BPM simulator -->
@@ -180,11 +181,12 @@
     <span class="sim-label">SIMULATE BPM</span>
     <input type="range" id="w-bpm-slider" min="30" max="220" value="72" step="1" class="sim-slider" />
     <span class="sim-val" id="sim-val">72</span>
-    <a href="index.html" class="sim-full-link">Open Full App →</a>
+    <a href="account.html" class="sim-full-link" id="sim-account-link">👤 Account →</a>
   </div>
 
 </div><!-- /page -->
 
+<script src="auth.js"></script>
 <script src="watch-app.js"></script>
 </body>
 </html>

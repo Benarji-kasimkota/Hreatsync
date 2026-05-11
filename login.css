@@ -1,0 +1,205 @@
+:root {
+  --zc: #e53935;
+  --zg: rgba(229, 57, 53, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  height: 100%;
+  background: #080202;
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.login-app {
+  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  gap: 2rem;
+}
+
+/* ── Brand ── */
+.login-brand { text-align: center; }
+
+.brand-heart {
+  font-size: 3.2rem;
+  color: var(--zc);
+  text-shadow: 0 0 32px var(--zg);
+  display: inline-block;
+  line-height: 1;
+  animation: hb 1.4s ease-in-out infinite;
+}
+@keyframes hb {
+  0%,100% { transform: scale(1); }
+  14%      { transform: scale(1.22); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.14); }
+  56%      { transform: scale(1); }
+}
+.brand-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  color: var(--zc);
+  text-shadow: 0 0 22px var(--zg);
+  margin-top: 0.6rem;
+}
+.brand-tagline {
+  font-size: 0.62rem;
+  color: #556;
+  letter-spacing: 0.18em;
+  margin-top: 0.4rem;
+}
+
+/* ── Card ── */
+.login-card {
+  width: 100%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Apple Sign In ── */
+.apple-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border: none;
+  border-radius: 11px;
+  cursor: pointer;
+  font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #000;
+  letter-spacing: -0.01em;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+.apple-btn:hover  { opacity: 0.88; }
+.apple-btn:active { opacity: 0.72; }
+.apple-btn:disabled { opacity: 0.45; cursor: default; }
+
+.apple-logo {
+  width: 18px;
+  height: 22px;
+  fill: #000;
+  flex-shrink: 0;
+  margin-top: -2px;
+}
+
+/* ── Divider ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #334;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* ── Form ── */
+#auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.form-row input {
+  width: 100%;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  padding: 0 1rem;
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.form-row input::placeholder { color: #445; }
+.form-row input:focus { border-color: rgba(229, 57, 53, 0.6); }
+
+.form-error {
+  font-size: 0.65rem;
+  color: #ff5252;
+  min-height: 1rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+.submit-btn {
+  height: 50px;
+  background: var(--zc);
+  border: none;
+  border-radius: 11px;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: opacity 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px var(--zg);
+  margin-top: 0.2rem;
+}
+.submit-btn:hover  { opacity: 0.9; }
+.submit-btn:active { opacity: 0.75; }
+.submit-btn:disabled { opacity: 0.4; cursor: default; }
+
+.mode-switch {
+  background: none;
+  border: none;
+  color: #445;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.63rem;
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: 0.05em;
+  padding: 0;
+}
+.mode-switch span { color: var(--zc); }
+.mode-switch:hover span { text-decoration: underline; }
+
+/* ── Footer notes ── */
+.privacy-note {
+  font-size: 0.58rem;
+  color: #334;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.demo-notice {
+  font-size: 0.52rem;
+  color: #2a2a2a;
+  letter-spacing: 0.06em;
+  text-align: center;
+  max-width: 280px;
+  display: none;
+}
+.demo-notice.show { display: block; }

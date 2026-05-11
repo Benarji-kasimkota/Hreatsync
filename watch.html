@@ -6,6 +6,9 @@
   <title>HeartSync — Apple Watch</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="watch.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-title" content="HeartSync" />
 </head>
 <body>
 
@@ -188,5 +191,6 @@
 
 <script src="auth.js"></script>
 <script src="watch-app.js"></script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');</script>
 </body>
 </html>

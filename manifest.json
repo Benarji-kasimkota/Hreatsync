@@ -1,0 +1,48 @@
+{
+  "name": "HeartSync",
+  "short_name": "HeartSync",
+  "description": "Your cardiac rhythm. Personalized biometric rhythm & vibration.",
+  "start_url": "./mobile.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#080202",
+  "theme_color": "#e53935",
+  "lang": "en",
+  "categories": ["health", "fitness", "medical"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Monitor",
+      "short_name": "Monitor",
+      "url": "./mobile.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "ML Insights",
+      "short_name": "ML",
+      "url": "./ml.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Account",
+      "short_name": "Account",
+      "url": "./account.html",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

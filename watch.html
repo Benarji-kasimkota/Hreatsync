@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeartSync — Apple Watch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="watch.css" />
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <header class="w-header">
+    <a href="index.html" class="back-link">← HeartSync</a>
+    <div class="w-header-text">
+      <h1>HeartSync <span>for Apple Watch</span></h1>
+      <p>PERSONAL CARDIAC SIGNATURE</p>
+    </div>
+  </header>
+
+  <!-- Main showcase -->
+  <div class="showcase">
+
+    <!-- Watch device -->
+    <div class="watch-wrap">
+      <div class="band band-top">
+        <div class="band-notch band-notch-left"></div>
+        <div class="band-notch band-notch-right"></div>
+      </div>
+
+      <div class="watch-body">
+        <!-- Crown -->
+        <div class="crown">
+          <div class="crown-ridges"></div>
+        </div>
+        <!-- Side button -->
+        <div class="side-btn"></div>
+
+        <!-- Display -->
+        <div class="watch-display">
+          <div class="screens-track" id="screens-track">
+
+            <!-- ── Screen 1: Live Monitor ── -->
+            <div class="screen" id="s-monitor">
+              <div class="s-zone-row">
+                <div class="s-zone-dot" id="s-zone-dot"></div>
+                <span class="s-zone-name" id="s-zone-name">NORMAL</span>
+              </div>
+              <div class="s-bpm" id="s-bpm">72</div>
+              <div class="s-bpm-label">BPM</div>
+              <canvas class="s-ecg" id="s-ecg"></canvas>
+              <div class="s-rr-row">
+                <span class="s-rr-label">RR</span>
+                <span class="s-rr-val" id="s-rr-val">833</span>
+                <span class="s-rr-unit">ms</span>
+              </div>
+            </div>
+
+            <!-- ── Screen 2: HRV Signature ── -->
+            <div class="screen" id="s-hrv">
+              <div class="s-title">YOUR SIGNATURE</div>
+              <div class="s-hrv-grid">
+                <div class="s-hrv-item">
+                  <div class="s-hrv-val" id="s-sdnn">—</div>
+                  <div class="s-hrv-unit">ms</div>
+                  <div class="s-hrv-label">SDNN</div>
+                </div>
+                <div class="s-hrv-item">
+                  <div class="s-hrv-val" id="s-rmssd">—</div>
+                  <div class="s-hrv-unit">ms</div>
+                  <div class="s-hrv-label">RMSSD</div>
+                </div>
+                <div class="s-hrv-item">
+                  <div class="s-hrv-val" id="s-pnn50">—</div>
+                  <div class="s-hrv-unit">%</div>
+                  <div class="s-hrv-label">pNN50</div>
+                </div>
+              </div>
+              <div class="s-rhythm-badge" id="s-rhythm-badge">LOADING</div>
+            </div>
+
+            <!-- ── Screen 3: Beat Pattern ── -->
+            <div class="screen" id="s-pattern">
+              <div class="s-title">BEAT PATTERN</div>
+              <canvas class="s-sparkline" id="s-sparkline"></canvas>
+              <div class="s-sig-label">RHYTHM FINGERPRINT</div>
+              <div class="s-sig-sub" id="s-sig-sub">Building signature…</div>
+            </div>
+
+            <!-- ── Screen 4: Haptic Mirror ── -->
+            <div class="screen" id="s-haptic">
+              <div class="s-title">HAPTIC MIRROR</div>
+              <div class="s-haptic-icon" id="s-haptic-icon">◎</div>
+              <div class="s-haptic-status" id="s-haptic-status">OFF</div>
+              <button class="s-haptic-btn" id="s-haptic-btn">START</button>
+              <div class="s-haptic-note">Mirrors your exact<br>beat-by-beat rhythm</div>
+            </div>
+
+          </div><!-- /screens-track -->
+        </div><!-- /watch-display -->
+
+        <!-- Nav dots -->
+        <div class="nav-dots" id="nav-dots">
+          <div class="ndot active" data-i="0"></div>
+          <div class="ndot" data-i="1"></div>
+          <div class="ndot" data-i="2"></div>
+          <div class="ndot" data-i="3"></div>
+        </div>
+
+      </div><!-- /watch-body -->
+
+      <div class="band band-bottom">
+        <div class="band-notch band-notch-left"></div>
+        <div class="band-notch band-notch-right"></div>
+      </div>
+    </div><!-- /watch-wrap -->
+
+    <!-- Info panel -->
+    <div class="info-panel">
+      <div class="info-screen-name" id="info-screen-name">Live Monitor</div>
+      <div class="info-desc" id="info-desc">Real-time BPM, zone classification, and live ECG trace from your Apple Watch heart rate sensor.</div>
+
+      <div class="info-nav">
+        <button class="inav-btn" id="prev-btn">←</button>
+        <span class="inav-screen-count" id="inav-count">1 / 4</span>
+        <button class="inav-btn" id="next-btn">→</button>
+      </div>
+
+      <div class="info-features">
+        <div class="if-item" id="if-0">
+          <div class="if-icon">♥</div>
+          <div class="if-text">
+            <div class="if-title">Live Heart Rate</div>
+            <div class="if-sub">BPM from Apple Watch sensor</div>
+          </div>
+        </div>
+        <div class="if-item" id="if-1">
+          <div class="if-icon">∿</div>
+          <div class="if-text">
+            <div class="if-title">ECG Waveform</div>
+            <div class="if-sub">PQRST trace with real HRV spacing</div>
+          </div>
+        </div>
+        <div class="if-item" id="if-2">
+          <div class="if-icon">◈</div>
+          <div class="if-text">
+            <div class="if-title">HRV Analysis</div>
+            <div class="if-sub">SDNN · RMSSD · pNN50</div>
+          </div>
+        </div>
+        <div class="if-item" id="if-3">
+          <div class="if-icon">⟁</div>
+          <div class="if-text">
+            <div class="if-title">Taptic Mirror</div>
+            <div class="if-sub">Exact beat-for-beat haptic replay</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-note">
+        <div class="tn-title">Implementation Note</div>
+        <div class="tn-body">This is an interactive design prototype. A production watchOS app requires Swift + WatchKit + HealthKit. The Taptic Engine on Apple Watch supports custom haptic patterns via <code>WKHapticType</code> and <code>CoreHaptics</code>.</div>
+      </div>
+    </div>
+
+  </div><!-- /showcase -->
+
+  <!-- Sync status -->
+  <div class="sync-status-bar">
+    <div class="ssb-dot" id="w-sync-dot"></div>
+    <span id="w-sync-label">IDLE</span>
+    <span class="ssb-sep">·</span>
+    <span class="ssb-info">Open <a href="index.html">Extended Web</a> or <a href="mobile.html">Mobile</a> in another tab to receive live data</span>
+  </div>
+
+  <!-- BPM simulator -->
+  <div class="sim-bar">
+    <span class="sim-label">SIMULATE BPM</span>
+    <input type="range" id="w-bpm-slider" min="30" max="220" value="72" step="1" class="sim-slider" />
+    <span class="sim-val" id="sim-val">72</span>
+    <a href="index.html" class="sim-full-link">Open Full App →</a>
+  </div>
+
+</div><!-- /page -->
+
+<script src="watch-app.js"></script>
+</body>
+</html>

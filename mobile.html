@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#06080f" />
+  <title>HeartSync Mobile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="mobile.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Status bar -->
+  <div class="status-bar">
+    <div class="sync-pill" id="sync-pill">
+      <div class="sync-dot" id="sync-dot"></div>
+      <span id="sync-label">STANDALONE</span>
+    </div>
+    <div class="status-title">HEARTSYNC</div>
+    <a href="index.html" class="status-link">WEB ↗</a>
+  </div>
+
+  <!-- Zone strip -->
+  <div class="zone-strip" id="zone-strip">
+    <div class="zone-strip-dot" id="zs-dot"></div>
+    <span class="zone-strip-name" id="zs-name">NORMAL</span>
+    <span class="zone-strip-desc" id="zs-desc">Normal resting range</span>
+  </div>
+
+  <!-- BPM ring -->
+  <div class="bpm-section">
+    <div class="bpm-ring" id="bpm-ring">
+      <canvas class="ring-canvas" id="ring-canvas"></canvas>
+      <div class="bpm-center">
+        <div class="bpm-num" id="m-bpm">72</div>
+        <div class="bpm-label">BPM</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ECG strip -->
+  <div class="ecg-wrap">
+    <canvas class="m-ecg" id="m-ecg"></canvas>
+  </div>
+
+  <!-- Metrics row -->
+  <div class="m-metrics">
+    <div class="m-metric">
+      <div class="m-metric-val" id="m-rr">833</div>
+      <div class="m-metric-unit">ms</div>
+      <div class="m-metric-label">R-R</div>
+    </div>
+    <div class="m-metric-divider"></div>
+    <div class="m-metric">
+      <div class="m-metric-val" id="m-freq">1.20</div>
+      <div class="m-metric-unit">Hz</div>
+      <div class="m-metric-label">FREQ</div>
+    </div>
+    <div class="m-metric-divider"></div>
+    <div class="m-metric">
+      <div class="m-metric-val" id="m-sdnn">—</div>
+      <div class="m-metric-unit">ms</div>
+      <div class="m-metric-label">SDNN</div>
+    </div>
+    <div class="m-metric-divider"></div>
+    <div class="m-metric">
+      <div class="m-metric-val" id="m-rhythm" style="font-size:0.8rem">—</div>
+      <div class="m-metric-unit">&nbsp;</div>
+      <div class="m-metric-label">RHYTHM</div>
+    </div>
+  </div>
+
+  <!-- Cardiac signature sparkline -->
+  <div class="spark-section">
+    <div class="spark-label">CARDIAC SIGNATURE</div>
+    <canvas class="m-spark" id="m-spark"></canvas>
+  </div>
+
+  <!-- Haptic control -->
+  <div class="haptic-section">
+    <button class="haptic-btn" id="m-haptic-btn">
+      <span class="haptic-btn-icon" id="haptic-icon">◎</span>
+      <span id="haptic-btn-text">START HAPTIC MIRROR</span>
+    </button>
+    <div class="haptic-note" id="haptic-note">Mirrors your exact beat rhythm via device vibration</div>
+  </div>
+
+  <!-- Manual BPM (standalone mode) -->
+  <div class="manual-section" id="manual-section">
+    <div class="manual-label">MANUAL BPM (STANDALONE)</div>
+    <div class="manual-row">
+      <span class="manual-val" id="manual-val">72</span>
+      <input type="range" id="m-slider" min="30" max="220" value="72" class="m-slider" />
+    </div>
+    <button class="tap-btn" id="m-tap-btn">TAP TO DETECT</button>
+    <div class="tap-hint" id="m-tap-hint">Tap 4+ times to calculate BPM</div>
+  </div>
+
+  <!-- Bottom nav -->
+  <nav class="bottom-nav">
+    <a href="watch.html" class="nav-item">
+      <span class="nav-icon">⌚</span>
+      <span class="nav-label">Watch</span>
+    </a>
+    <a href="mobile.html" class="nav-item nav-active">
+      <span class="nav-icon">📱</span>
+      <span class="nav-label">Mobile</span>
+    </a>
+    <a href="index.html" class="nav-item">
+      <span class="nav-icon">🖥</span>
+      <span class="nav-label">Extended</span>
+    </a>
+  </nav>
+
+</div><!-- /app -->
+
+<script src="mobile-app.js"></script>
+</body>
+</html>

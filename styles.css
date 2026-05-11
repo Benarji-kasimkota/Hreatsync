@@ -1,0 +1,256 @@
+:root {
+  --zone-color: #00e5ff;
+  --zone-bg: #0a0e1a;
+  --zone-glow: rgba(0, 229, 255, 0.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--zone-bg);
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', monospace;
+  min-height: 100vh;
+  transition: background 0.6s ease;
+  overflow-x: hidden;
+}
+
+/* ── Header ── */
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 900;
+  color: var(--zone-color);
+  text-shadow: 0 0 20px var(--zone-glow), 0 0 40px var(--zone-glow);
+  letter-spacing: 0.15em;
+  transition: color 0.6s, text-shadow 0.6s;
+}
+header p {
+  font-size: 0.8rem;
+  color: #556;
+  letter-spacing: 0.2em;
+  margin-top: 0.4rem;
+}
+
+/* ── Header nav links ── */
+.header-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 0.9rem;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--zone-color);
+  border-radius: 18px;
+  color: var(--zone-color);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s, border-color 0.6s, color 0.6s;
+}
+.nav-link:hover { background: rgba(255,255,255,0.05); box-shadow: 0 0 12px var(--zone-glow); }
+
+/* ── Connection Status Bar ── */
+.conn-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 1.5rem;
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.68rem;
+  color: #445;
+  flex-wrap: wrap;
+}
+.conn-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #334;
+  flex-shrink: 0;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+.conn-dot.live {
+  background: #69f0ae;
+  box-shadow: 0 0 6px rgba(105,240,174,0.7);
+  animation: conn-pulse 1.4s ease-in-out infinite;
+}
+@keyframes conn-pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.conn-badges { display: flex; gap: 0.5rem; margin-left: auto; }
+.conn-badge {
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.6rem;
+  color: #334;
+  transition: border-color 0.4s, color 0.4s;
+}
+.conn-badge.connected {
+  border-color: #69f0ae;
+  color: #69f0ae;
+}
+
+/* ── Grid Layout ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem;
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Card ── */
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.6s;
+}
+.card-wide { grid-column: 1 / -1; }
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+  animation: scan 4s linear infinite;
+}
+@keyframes scan { 0%{left:-60%} 100%{left:160%} }
+.card-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--zone-color);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  transition: color 0.6s;
+}
+
+/* ── BPM Panel ── */
+#bpm-panel { grid-column: span 2; }
+@media (max-width: 660px) { #bpm-panel { grid-column: span 1; } }
+
+.bpm-display {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(4rem, 14vw, 7rem);
+  font-weight: 900;
+  color: var(--zone-color);
+  text-shadow: 0 0 30px var(--zone-glow);
+  text-align: center;
+  line-height: 1;
+  transition: color 0.4s, text-shadow 0.4s;
+}
+.bpm-unit { font-size: 1.2rem; letter-spacing: 0.3em; color: #556; text-align: center; margin-top: 0.3rem; }
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%; height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px; outline: none;
+  margin: 1.5rem 0 0.5rem; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--zone-color);
+  box-shadow: 0 0 10px var(--zone-glow);
+  transition: background 0.4s, box-shadow 0.4s;
+}
+.slider-labels { display: flex; justify-content: space-between; font-size: 0.7rem; color: #445; }
+
+/* ── Tap Button ── */
+#tap-btn {
+  display: block; width: 100%;
+  margin-top: 1.2rem; padding: 0.9rem;
+  background: transparent;
+  border: 1px solid var(--zone-color);
+  border-radius: 8px;
+  color: var(--zone-color);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.85rem; letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, border-color 0.6s, color 0.6s;
+}
+#tap-btn:hover { background: rgba(255,255,255,0.04); }
+#tap-btn.tapped { background: var(--zone-color); color: #000; box-shadow: 0 0 20px var(--zone-glow); }
+#tap-status { font-size: 0.72rem; color: #556; text-align: center; margin-top: 0.5rem; min-height: 1.2em; }
+
+/* ── Zone Badge ── */
+.zone-badge {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px; border: 1px solid var(--zone-color);
+  color: var(--zone-color);
+  font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em;
+  text-shadow: 0 0 8px var(--zone-glow);
+  transition: color 0.6s, border-color 0.6s, text-shadow 0.6s;
+  margin-bottom: 0.8rem;
+}
+.zone-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--zone-color); box-shadow: 0 0 6px var(--zone-glow); transition: background 0.6s, box-shadow 0.6s; }
+.zone-desc { font-size: 0.78rem; color: #778; line-height: 1.6; }
+
+/* ── Metrics ── */
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.metric { background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.9rem; border-left: 3px solid var(--zone-color); transition: border-color 0.6s; }
+.metric-label { font-size: 0.65rem; color: #556; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.metric-value { font-family: 'Orbitron', sans-serif; font-size: 1.25rem; color: var(--zone-color); transition: color 0.4s; }
+.metric-unit  { font-size: 0.65rem; color: #445; margin-left: 0.3rem; }
+
+/* ── ECG Canvas ── */
+#ecg-canvas { width: 100%; height: 120px; display: block; border-radius: 6px; background: rgba(0,0,0,0.3); }
+
+/* ── HRV Analysis ── */
+.hrv-legend { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
+.hrv-tag { font-size: 0.65rem; letter-spacing: 0.12em; }
+
+/* ── Cardiac Signature ── */
+.sparkline-wrap { width: 100%; height: 80px; margin-bottom: 0.8rem; border-radius: 6px; background: rgba(0,0,0,0.25); overflow: hidden; padding: 6px; }
+.sparkline-canvas { width: 100%; height: 100%; display: block; }
+.sig-desc { font-size: 0.7rem; color: #556; line-height: 1.5; }
+
+/* ── Session Timeline ── */
+.timeline-wrap { position: relative; width: 100%; height: 140px; margin-bottom: 0.8rem; }
+.timeline-canvas { width: 100%; height: 100%; display: block; border-radius: 6px; background: rgba(0,0,0,0.3); }
+.timeline-legend {
+  position: absolute; top: 8px; right: 10px;
+  display: flex; gap: 1rem;
+}
+.tl-item { display: flex; align-items: center; gap: 5px; font-size: 0.58rem; color: #445; }
+.tl-line { display: inline-block; width: 20px; height: 2px; }
+.tl-line.solid  { background: var(--zone-color); }
+.tl-line.dashed { background: repeating-linear-gradient(90deg,rgba(255,255,255,0.25) 0 4px,transparent 4px 8px); }
+.session-stats {
+  display: flex; flex-wrap: wrap; gap: 1.2rem;
+  font-size: 0.7rem; color: #556;
+}
+.session-stats strong { color: var(--zone-color); }
+
+/* ── Vibration ── */
+.vib-info { background: rgba(0,0,0,0.25); border-radius: 8px; padding: 1rem; font-size: 0.82rem; color: #778; line-height: 1.8; margin-bottom: 0.5rem; }
+.vib-info span { color: var(--zone-color); font-weight: bold; transition: color 0.4s; }
+.vib-mode-label { font-size: 0.68rem; color: #445; margin-bottom: 1rem; padding-left: 0.2rem; }
+.vib-btn { padding: 0.8rem 1.6rem; background: transparent; border: 1px solid var(--zone-color); border-radius: 8px; color: var(--zone-color); font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; letter-spacing: 0.1em; cursor: pointer; transition: background 0.2s, box-shadow 0.2s, border-color 0.6s, color 0.6s; margin-right: 0.6rem; margin-bottom: 0.5rem; }
+.vib-btn:hover { background: rgba(255,255,255,0.05); }
+.vib-btn.active { background: var(--zone-color); color: #000; box-shadow: 0 0 16px var(--zone-glow); }
+#vib-note { font-size: 0.7rem; color: #445; margin-top: 0.5rem; }
+
+/* ── Beat Sequencer ── */
+.dots-row { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; padding: 0.5rem 0; }
+.beat-dot { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); transition: background 0.08s, box-shadow 0.08s; }
+.beat-dot.lit { background: var(--zone-color); box-shadow: 0 0 10px var(--zone-glow); }
+
+/* ── Footer ── */
+footer { text-align: center; padding: 2rem; font-size: 0.68rem; color: #334; letter-spacing: 0.15em; }

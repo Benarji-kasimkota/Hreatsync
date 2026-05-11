@@ -1,0 +1,611 @@
+:root {
+  --zc: #00e5ff;
+  --zg: rgba(0,229,255,0.3);
+  --page-bg: #06080f;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--page-bg);
+  color: #e0e0e0;
+  font-family: 'Share Tech Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Page ── */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+/* ── Header ── */
+.w-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.back-link {
+  color: var(--zc);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.back-link:hover { opacity: 0.7; }
+.w-header-text h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: var(--zc);
+  text-shadow: 0 0 20px var(--zg);
+  transition: color 0.6s, text-shadow 0.6s;
+}
+.w-header-text h1 span {
+  font-weight: 400;
+  opacity: 0.7;
+}
+.w-header-text p {
+  font-size: 0.68rem;
+  color: #445;
+  letter-spacing: 0.2em;
+  margin-top: 0.2rem;
+}
+
+/* ── Showcase layout ── */
+.showcase {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Watch Wrap (band + body) ── */
+.watch-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Band ── */
+.band {
+  width: 162px;
+  height: 90px;
+  background: linear-gradient(to bottom, #1c1c1e, #111113);
+  position: relative;
+  border-left: 2px solid rgba(255,255,255,0.06);
+  border-right: 2px solid rgba(255,255,255,0.06);
+}
+.band-top {
+  border-radius: 18px 18px 0 0;
+  border-top: 2px solid rgba(255,255,255,0.08);
+}
+.band-bottom {
+  border-radius: 0 0 18px 18px;
+  border-bottom: 2px solid rgba(255,255,255,0.04);
+}
+.band-notch {
+  position: absolute;
+  bottom: 0;
+  width: 12px; height: 8px;
+  background: #0a0a0c;
+  border-radius: 3px 3px 0 0;
+}
+.band-notch-left  { left: 14px; }
+.band-notch-right { right: 14px; }
+.band-top .band-notch {
+  bottom: auto;
+  top: 0;
+  border-radius: 0 0 3px 3px;
+}
+
+/* ── Watch Body ── */
+.watch-body {
+  width: 200px;
+  height: 242px;
+  background: linear-gradient(145deg, #2c2c2e, #1a1a1c, #222224);
+  border-radius: 54px;
+  position: relative;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.5),
+    0 0 0 1px rgba(0,0,0,0.9),
+    0 30px 80px rgba(0,0,0,0.7),
+    0 4px 12px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+/* ── Crown ── */
+.crown {
+  position: absolute;
+  right: -11px;
+  top: 62px;
+  width: 10px;
+  height: 46px;
+  background: linear-gradient(to right, #2a2a2c, #3a3a3c, #2a2a2c);
+  border-radius: 5px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    1px 0 3px rgba(0,0,0,0.5);
+}
+.crown-ridges {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(0,0,0,0.3) 3px,
+    rgba(0,0,0,0.3) 4px
+  );
+}
+
+/* ── Side Button ── */
+.side-btn {
+  position: absolute;
+  right: -9px;
+  top: 120px;
+  width: 7px;
+  height: 22px;
+  background: linear-gradient(to right, #222224, #333335);
+  border-radius: 3px;
+  box-shadow: 1px 0 3px rgba(0,0,0,0.5);
+}
+
+/* ── Watch Display ── */
+.watch-display {
+  position: absolute;
+  top: 14px; left: 14px;
+  right: 14px; bottom: 26px;
+  border-radius: 42px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* ── Screen Carousel ── */
+.screens-track {
+  display: flex;
+  width: 400%;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.screen {
+  width: 25%;
+  height: 100%;
+  padding: 14px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle ambient glow at top of each screen */
+.screen::before {
+  content: '';
+  position: absolute;
+  top: -20px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 40px;
+  background: var(--zg);
+  border-radius: 50%;
+  filter: blur(16px);
+  opacity: 0.6;
+  transition: background 0.6s;
+  pointer-events: none;
+}
+
+/* ── Nav Dots ── */
+.nav-dots {
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+.ndot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.ndot.active {
+  background: var(--zc);
+  transform: scale(1.3);
+  box-shadow: 0 0 4px var(--zg);
+}
+
+/* ════════════════════════════
+   SCREEN 1 — LIVE MONITOR
+════════════════════════════ */
+.s-zone-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 4px;
+}
+.s-zone-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--zc);
+  box-shadow: 0 0 5px var(--zg);
+  animation: pulse-dot 1.2s ease-in-out infinite;
+  transition: background 0.6s, box-shadow 0.6s;
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.7; }
+}
+.s-zone-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  color: var(--zc);
+  transition: color 0.6s;
+}
+.s-bpm {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--zc);
+  text-shadow: 0 0 20px var(--zg);
+  line-height: 1;
+  transition: color 0.4s, text-shadow 0.4s;
+}
+.s-bpm-label {
+  font-size: 0.48rem;
+  letter-spacing: 0.3em;
+  color: #445;
+  margin-top: 1px;
+  margin-bottom: 6px;
+}
+.s-ecg {
+  width: 100%;
+  height: 36px;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.4);
+  display: block;
+  margin-bottom: 6px;
+}
+.s-rr-row {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+.s-rr-label { font-size: 0.46rem; color: #445; letter-spacing: 0.1em; }
+.s-rr-val   { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; color: var(--zc); transition: color 0.4s; }
+.s-rr-unit  { font-size: 0.44rem; color: #334; }
+
+/* ════════════════════════════
+   SCREEN 2 — HRV SIGNATURE
+════════════════════════════ */
+.s-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.46rem;
+  letter-spacing: 0.22em;
+  color: var(--zc);
+  margin-bottom: 10px;
+  transition: color 0.6s;
+}
+.s-hrv-grid {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.s-hrv-item {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 6px 4px;
+  text-align: center;
+  border-top: 1.5px solid var(--zc);
+  transition: border-color 0.6s;
+}
+.s-hrv-val {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+  color: var(--zc);
+  transition: color 0.4s;
+  line-height: 1.1;
+}
+.s-hrv-unit { font-size: 0.38rem; color: #334; }
+.s-hrv-label { font-size: 0.38rem; color: #556; letter-spacing: 0.1em; margin-top: 2px; }
+.s-rhythm-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.2em;
+  color: var(--zc);
+  border: 1px solid var(--zc);
+  border-radius: 10px;
+  padding: 3px 10px;
+  text-shadow: 0 0 8px var(--zg);
+  transition: color 0.6s, border-color 0.6s, text-shadow 0.6s;
+}
+
+/* ════════════════════════════
+   SCREEN 3 — BEAT PATTERN
+════════════════════════════ */
+.s-sparkline {
+  width: 100%;
+  height: 60px;
+  display: block;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.3);
+  margin-bottom: 8px;
+}
+.s-sig-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.42rem;
+  letter-spacing: 0.2em;
+  color: var(--zc);
+  transition: color 0.6s;
+}
+.s-sig-sub {
+  font-size: 0.4rem;
+  color: #445;
+  margin-top: 2px;
+  text-align: center;
+}
+
+/* ════════════════════════════
+   SCREEN 4 — HAPTIC MIRROR
+════════════════════════════ */
+.s-haptic-icon {
+  font-size: 1.8rem;
+  color: var(--zc);
+  opacity: 0.7;
+  margin-bottom: 4px;
+  transition: color 0.6s;
+}
+.s-haptic-icon.beating {
+  animation: haptic-pulse 0.8s ease-in-out infinite;
+}
+@keyframes haptic-pulse {
+  0%   { transform: scale(1);    opacity: 0.7; }
+  50%  { transform: scale(1.25); opacity: 1;   }
+  100% { transform: scale(1);    opacity: 0.7; }
+}
+.s-haptic-status {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  color: #445;
+  letter-spacing: 0.2em;
+  margin-bottom: 8px;
+  transition: color 0.4s;
+}
+.s-haptic-status.on { color: var(--zc); text-shadow: 0 0 8px var(--zg); }
+.s-haptic-btn {
+  background: transparent;
+  border: 1px solid var(--zc);
+  border-radius: 12px;
+  color: var(--zc);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.15em;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.6s;
+  margin-bottom: 8px;
+}
+.s-haptic-btn:hover,
+.s-haptic-btn.active {
+  background: var(--zc);
+  color: #000;
+}
+.s-haptic-note {
+  font-size: 0.38rem;
+  color: #334;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ════════════════════════════
+   INFO PANEL
+════════════════════════════ */
+.info-panel {
+  flex: 1;
+  min-width: 260px;
+  max-width: 400px;
+}
+.info-screen-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--zc);
+  transition: color 0.6s;
+  margin-bottom: 0.6rem;
+}
+.info-desc {
+  font-size: 0.78rem;
+  color: #778;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+.info-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+.inav-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  color: #aaa;
+  font-size: 1rem;
+  width: 36px; height: 36px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.inav-btn:hover {
+  border-color: var(--zc);
+  color: var(--zc);
+  background: rgba(255,255,255,0.03);
+}
+.inav-screen-count {
+  font-size: 0.72rem;
+  color: #445;
+  letter-spacing: 0.1em;
+}
+
+/* Features list */
+.info-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+.if-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: border-color 0.3s, background 0.3s;
+}
+.if-item.active {
+  border-color: var(--zc);
+  background: rgba(255,255,255,0.04);
+}
+.if-icon {
+  font-size: 1.1rem;
+  color: var(--zc);
+  width: 24px;
+  text-align: center;
+  transition: color 0.6s;
+}
+.if-title { font-size: 0.78rem; color: #ccc; margin-bottom: 0.1rem; }
+.if-sub   { font-size: 0.66rem; color: #556; }
+
+/* Tech note */
+.tech-note {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 3px solid #445;
+  border-radius: 8px;
+  padding: 1rem;
+}
+.tn-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: #556;
+  margin-bottom: 0.5rem;
+}
+.tn-body { font-size: 0.7rem; color: #556; line-height: 1.7; }
+.tn-body code {
+  color: var(--zc);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem;
+}
+
+/* ── Simulator Bar ── */
+.sim-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  padding: 1rem 1.4rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+}
+.sim-label {
+  font-size: 0.65rem;
+  color: #445;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+.sim-slider {
+  -webkit-appearance: none;
+  flex: 1;
+  min-width: 120px;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.sim-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--zc);
+  box-shadow: 0 0 8px var(--zg);
+  transition: background 0.4s;
+}
+.sim-val {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  color: var(--zc);
+  min-width: 36px;
+  transition: color 0.4s;
+}
+.sim-full-link {
+  color: var(--zc);
+  text-decoration: none;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--zc);
+  border-radius: 16px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.sim-full-link:hover { background: rgba(255,255,255,0.05); }
+
+/* ── Sync Status Bar ── */
+.sync-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+  padding: 0.6rem 1rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  font-size: 0.65rem;
+  color: #445;
+  flex-wrap: wrap;
+}
+.ssb-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #334;
+  flex-shrink: 0;
+  transition: background 0.4s, box-shadow 0.4s;
+}
+.ssb-dot.live {
+  background: #69f0ae;
+  box-shadow: 0 0 6px rgba(105,240,174,0.7);
+  animation: ssb-pulse 1.4s ease-in-out infinite;
+}
+@keyframes ssb-pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+#w-sync-label { color: var(--zc); font-size: 0.65rem; letter-spacing: 0.12em; transition: color 0.4s; }
+.ssb-sep { color: #334; }
+.ssb-info { font-size: 0.62rem; color: #334; }
+.ssb-info a { color: var(--zc); text-decoration: none; }
+.ssb-info a:hover { text-decoration: underline; }
+
+/* ── Responsive ── */
+@media (max-width: 660px) {
+  .showcase { flex-direction: column; align-items: center; }
+  .info-panel { max-width: 100%; }
+  .w-header { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+}

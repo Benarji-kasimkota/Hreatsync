@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HeartSync — Extended</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <h1>HEARTSYNC</h1>
+  <p>HEART RATE VIBRATION &amp; RHYTHM CALCULATOR</p>
+  <div class="header-links">
+    <a href="watch.html"  class="nav-link">⌚ Watch</a>
+    <a href="mobile.html" class="nav-link">📱 Mobile</a>
+  </div>
+</header>
+
+<!-- Connection status bar -->
+<div class="conn-bar" id="conn-bar">
+  <div class="conn-dot" id="conn-dot"></div>
+  <span id="conn-text">No active sync</span>
+  <div class="conn-badges">
+    <span class="conn-badge" id="badge-watch">⌚ Watch</span>
+    <span class="conn-badge" id="badge-mobile">📱 Mobile</span>
+  </div>
+</div>
+
+<div class="grid">
+
+  <!-- BPM INPUT -->
+  <div class="card" id="bpm-panel">
+    <div class="card-title">BPM Input Engine</div>
+    <div class="bpm-display" id="bpm-display">72</div>
+    <div class="bpm-unit">BEATS PER MINUTE</div>
+    <input type="range" id="bpm-slider" min="30" max="220" value="72" step="1" />
+    <div class="slider-labels"><span>30</span><span>72</span><span>220</span></div>
+    <button id="tap-btn">TAP BEAT TO DETECT BPM</button>
+    <div id="tap-status">Tap at least 4 times to calculate</div>
+  </div>
+
+  <!-- ZONE CLASSIFIER -->
+  <div class="card" id="zone-card">
+    <div class="card-title">Heart Rate Zone</div>
+    <div class="zone-badge">
+      <div class="zone-dot"></div>
+      <span id="zone-name">NORMAL</span>
+    </div>
+    <div class="zone-desc" id="zone-desc">Normal resting heart rate. Cardiovascular system is operating efficiently at this range.</div>
+  </div>
+
+  <!-- RHYTHM METRICS -->
+  <div class="card">
+    <div class="card-title">Rhythm Metrics</div>
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="metric-label">R-R Interval</div>
+        <div class="metric-value"><span id="rr-val">833</span><span class="metric-unit">ms</span></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Beat Frequency</div>
+        <div class="metric-value"><span id="freq-val">1.20</span><span class="metric-unit">Hz</span></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Tempo Interval</div>
+        <div class="metric-value"><span id="tempo-val">833</span><span class="metric-unit">ms</span></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Musical Tempo</div>
+        <div class="metric-value" style="font-size:0.85rem"><span id="music-val">Andante</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ECG VISUALIZER -->
+  <div class="card">
+    <div class="card-title">Live ECG Waveform</div>
+    <canvas id="ecg-canvas"></canvas>
+  </div>
+
+  <!-- HRV ANALYSIS -->
+  <div class="card">
+    <div class="card-title">HRV Analysis — Your Rhythm Signature</div>
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="metric-label">SDNN</div>
+        <div class="metric-value"><span id="sdnn-val">—</span><span class="metric-unit">ms</span></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">RMSSD</div>
+        <div class="metric-value"><span id="rmssd-val">—</span><span class="metric-unit">ms</span></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">pNN50</div>
+        <div class="metric-value"><span id="pnn50-val">—</span><span class="metric-unit">%</span></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Rhythm State</div>
+        <div class="metric-value" style="font-size:0.9rem"><span id="rhythm-label">LOADING</span></div>
+      </div>
+    </div>
+    <div class="hrv-legend">
+      <span class="hrv-tag" style="color:#69f0ae">● COHERENT</span>
+      <span class="hrv-tag" style="color:#00e5ff">● VARIABLE</span>
+      <span class="hrv-tag" style="color:#ffa726">● REDUCED</span>
+      <span class="hrv-tag" style="color:#ef5350">● RIGID</span>
+    </div>
+  </div>
+
+  <!-- CARDIAC SIGNATURE -->
+  <div class="card">
+    <div class="card-title">Cardiac Signature — Beat Pattern</div>
+    <div class="sparkline-wrap">
+      <canvas id="sparkline-canvas" class="sparkline-canvas"></canvas>
+    </div>
+    <div class="sig-desc">Each bar = one R-R interval. Height variation = your unique cardiac rhythm fingerprint.</div>
+  </div>
+
+  <!-- SESSION TIMELINE (extended analytics) -->
+  <div class="card card-wide">
+    <div class="card-title">Session Timeline — Extended Analytics</div>
+    <div class="timeline-wrap">
+      <canvas id="timeline-canvas" class="timeline-canvas"></canvas>
+      <div class="timeline-legend">
+        <span class="tl-item"><span class="tl-line solid"></span> BPM</span>
+        <span class="tl-item"><span class="tl-line dashed"></span> SDNN (HRV)</span>
+      </div>
+    </div>
+    <div class="session-stats" id="session-stats">Collecting session data — updates every 5 seconds…</div>
+  </div>
+
+  <!-- VIBRATION ENGINE -->
+  <div class="card">
+    <div class="card-title">Vibration Engine — Cardiac Mirror</div>
+    <div class="vib-info">
+      ON <span id="vib-on">250</span>ms · OFF <span id="vib-off">583</span>ms @ <span id="vib-bpm">72</span> BPM
+    </div>
+    <div class="vib-mode-label">Using live R-R intervals — mirrors your exact beat rhythm</div>
+    <button class="vib-btn" id="vib-start-btn">START VIBRATION</button>
+    <button class="vib-btn" id="vib-stop-btn">STOP</button>
+    <div id="vib-note">Haptic feedback requires Android + Chrome with vibration support.</div>
+  </div>
+
+  <!-- BEAT SEQUENCER -->
+  <div class="card">
+    <div class="card-title">Beat Dot Sequencer</div>
+    <div class="dots-row" id="dots-row"></div>
+  </div>
+
+</div>
+
+<footer>
+  HEARTSYNC · BIOMETRIC RHYTHM INTERFACE · v2.0
+  &nbsp;·&nbsp;
+  <a href="watch.html"  style="color:inherit;text-decoration:underline">Watch</a>
+  &nbsp;·&nbsp;
+  <a href="mobile.html" style="color:inherit;text-decoration:underline">Mobile</a>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

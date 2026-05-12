@@ -340,7 +340,22 @@ window.addEventListener('resize', () => { resizeECG(); drawRing(); });
 
 // ── Init ──
 resizeECG();
-applyBPM(72);
+
+// Read ?bpm= injected by iOS Shortcut or Apple Health bridge
+(function applyURLParams() {
+  const params = new URLSearchParams(location.search);
+  const urlBpm = parseInt(params.get('bpm') || params.get('hr') || '0', 10);
+  if (urlBpm >= 30 && urlBpm <= 220) {
+    applyBPM(urlBpm);
+    // Show a brief "from Health" indicator
+    const label = el('sync-label');
+    if (label) { label.textContent = 'FROM HEALTH'; label.classList.add('live'); }
+    setTimeout(() => { if (label) { label.textContent = 'STANDALONE'; label.classList.remove('live'); } }, 4000);
+  } else {
+    applyBPM(72);
+  }
+})();
+
 requestAnimationFrame(drawECG);
 
 // ── ML stress display ──

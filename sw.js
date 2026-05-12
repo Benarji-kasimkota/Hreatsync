@@ -1,5 +1,5 @@
 // HeartSync Service Worker — offline-first cache
-const CACHE  = 'heartsync-v1';
+const CACHE  = 'heartsync-v2';
 const ASSETS = [
   './',
   './mobile.html',
@@ -8,12 +8,14 @@ const ASSETS = [
   './account.html',
   './ml.html',
   './login.html',
+  './health-connect.html',
   './mobile.css',
   './styles.css',
   './watch.css',
   './account.css',
   './ml.css',
   './login.css',
+  './health-connect.css',
   './mobile-app.js',
   './app.js',
   './watch-app.js',
@@ -23,6 +25,7 @@ const ASSETS = [
   './auth.js',
   './login.js',
   './dataset.js',
+  './health-connect.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
